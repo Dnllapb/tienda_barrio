@@ -78,11 +78,11 @@ public class Compra {
     }
 
     public Double getValorTotslCompra() {
-        return valorTotslCompra;
+        return valorTotalCompra;
     }
 
     public void setValorTotslCompra(Double valorTotslCompra) {
-        this.valorTotslCompra = valorTotslCompra;
+        this.valorTotalCompra = valorTotslCompra;
     }
 
     @Override
@@ -95,7 +95,7 @@ public class Compra {
                 ", valorTotal=" + valorTotal +
                 ", nitProveedor=" + nitProveedor +
                 ", valorUniCompra=" + valorUniCompra +
-                ", valorTotslCompra=" + valorTotslCompra +
+                ", valorTotslCompra=" + valorTotalCompra +
                 '}';
     }
 }

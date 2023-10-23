@@ -27,21 +27,41 @@ public class Administracion {
                 .findAny();
     }
 
-    public Optional<Producto> modificarProducto(String codigoProducto,String nombreProducto, String marcaProducto,String tipoEmpaque,
-                                                Double medidaProducto,String tipoMedidaProducto,String etiquetaProducto,String categoriaProducto,
-                                                Double cantidadProducto){
+    public Optional<Producto> modificarProducto(String codigoProducto, String opcion, String nuevoValor) {
         return productoList.stream()
                 .filter(producto -> producto.getCodigoProducto().equals(codigoProducto))
                 .findFirst()
                 .map(productoEncontrado -> {
-                    productoEncontrado.setNombreProducto(nombreProducto);
-                    productoEncontrado.setMarcaProducto(marcaProducto);
-                    productoEncontrado.setTipoEmpaque(tipoEmpaque);
-                    productoEncontrado.setMedidaProducto(medidaProducto);
-                    productoEncontrado.setTipoMedidaProducto(tipoMedidaProducto);
-                    productoEncontrado.setEtiquetaProducto(etiquetaProducto);
-                    productoEncontrado.setCategoriaProducto(categoriaProducto);
-                    productoEncontrado.setCantidadProducto(cantidadProducto);
+                    switch (opcion) {
+                        case "1":
+                            productoEncontrado.setNombreProducto(nuevoValor);
+                            break;
+                        case "2":
+                            productoEncontrado.setMarcaProducto(nuevoValor);
+                            break;
+                        case "3":
+                            productoEncontrado.setTipoEmpaque(nuevoValor);
+                            break;
+                        case "4":
+                            productoEncontrado.setMedidaProducto(Double.valueOf(nuevoValor));
+                            break;
+                        case "5":
+                            productoEncontrado.setTipoMedidaProducto(nuevoValor);
+                            break;
+                        case "6":
+                            productoEncontrado.setEtiquetaProducto(nuevoValor);
+                            break;
+                        case "7":
+                            productoEncontrado.setCategoriaProducto(nuevoValor);
+                            break;
+                        case "8":
+                            productoEncontrado.setCantidadProducto(Double.valueOf(nuevoValor));
+                            break;
+
+                        default:
+                            System.out.println("Opción no válida.");
+                            break;
+                    }
                     return Optional.of(productoEncontrado);
                 })
                 .orElse(Optional.empty());
