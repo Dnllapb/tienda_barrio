@@ -92,35 +92,45 @@ public class Main {
     {
         System.out.println("INGRESA EL CODIGO DEL PRODUCTO A BUSCAR : ");
         Scanner scanner = new Scanner(System.in);
-        String codigoProducto= scanner.next();
+        String codigoProducto = scanner.next();
         scanner.nextLine();
 
-        int codigoencontrado = codigoProducto.indexOf(codigoProducto);
-        int opcionesProducto =0;
-        System.out.println("Por favor selecciona que item del producto quieres modificar");
-        System.out.println("±----------------------------------------±");
-        System.out.println("|   Modificar Producto   |");
-        System.out.println("±----------------------------------------±");
-        System.out.println("1. Nombre producto                       |");
-        System.out.println("2. Marca producto                        |");
-        System.out.println("3. Tipo de empaque Producto              |");
-        System.out.println("4. Medida Producto                       |");
-        System.out.println("5. Tipo Medida Producto                  |");
-        System.out.println("6. Etiqueta Producto                     |");
-        System.out.println("7. Categoria Producto                    |");
-        System.out.println("8. Cantidad Producto                     |");
-        System.out.println("9. Regresar menú principal               |");
+        Optional<Producto> productoEncontrado = administracion.buscarProducto(codigoProducto);
 
-            switch (opcionesProducto)
-            {
-                case 1:
-                    System.out.println("Por favor ingresa el nuevo nombre del  producto");
+        if (productoEncontrado.isPresent()) {
+            System.out.println("Seleccione el campo del producto que desee modificar: ");
+            System.out.println("1. Nombre del Producto");
+            System.out.println("2. Marca del Producto");
+            System.out.println("3. Tipo de Empaque");
+            System.out.println("4. Medida");
+            System.out.println("5. Tipo de medida");
+            System.out.println("6. Etiqueta Producto");
+            System.out.println("7. Categoria Producto");
+            System.out.println("8. Cantidad");
 
 
+            String opcion = scanner.nextLine();
 
 
+            String nuevoValor = scanner.nextLine();
 
+            Optional<Producto> productoModificado = administracion.modificarProducto(
+                    codigoProducto,
+                    opcion,
+                    nuevoValor
+            );
+
+            if (productoModificado.isPresent()) {
+                System.out.println("Producto modificado exitosamente.");
+                System.out.println(" ");
+            } else {
+                System.out.println("No se pudo modificar el producto.");
+                System.out.println(" ");
             }
+        } else {
+            System.out.println("Producto no encontrado.");
+            System.out.println(" ");
+        }
 
 
     }
@@ -169,11 +179,12 @@ public class Main {
         System.out.println("INGRESA EL VALOR UNITARIO DE LA COMPRA: ");
         String tipoEmpaque = scanner.nextLine();
 
+
         scanner.nextLine();
-        Producto producto = new Producto(codigoProducto, nombreProducto, marcaProducto, tipoEmpaque,medidaProducto,tipoMedidaProducto,etiquetaProducto,categoriaProducto,cantidadProducto) {
+      /*  Co producto = new Producto() {
         };
         administracion.agregarProducto(producto);
-        System.out.println(producto.toString());
+        System.out.println(producto.toString());*/
 
     }
     public static void modificarCompra(Administracion administracion){
