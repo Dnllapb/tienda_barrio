@@ -4,6 +4,7 @@ import org.example.Compra.Compra;
 import org.example.Producto.Producto;
 import org.example.Venta.Venta;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
@@ -167,24 +168,38 @@ public class Main {
         //REGISTRAR NUEVA COMPRA DE PRODUCTO
         Scanner scanner = new Scanner(System.in);
         System.out.println("INGRESA  LA FECHA DE LA COMPRA: ");
-        String marcaProducto =  scanner.nextLine();
-        System.out.println("INGRESA EL CODIGO DE LA COMPRA : ");
-        String codigoProducto = scanner.nextLine();
-        System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
-        String nitProveedor = scanner.nextLine();
-
-        System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
-        String nombreProducto = scanner.nextLine();
-        
-        System.out.println("INGRESA EL VALOR UNITARIO DE LA COMPRA: ");
-        String tipoEmpaque = scanner.nextLine();
-
-
+        String fechaCompra =  scanner.next();
         scanner.nextLine();
-      /*  Co producto = new Producto() {
-        };
-        administracion.agregarProducto(producto);
-        System.out.println(producto.toString());*/
+        System.out.println("INGRESA EL CODIGO DE LA COMPRA : ");
+        String idCompra = scanner.next();
+        System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
+        int nitProveedor = scanner.nextInt();
+        scanner.nextLine();
+        System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
+        String nombreProveedor = scanner.next();
+        scanner.nextLine();
+        System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
+        String codigoProducto = scanner.next();
+        scanner.nextLine();
+
+        Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto );
+        if (productoOptional.isPresent() ) {
+            System.out.println(productoOptional.get().getNombreProducto());
+        } else {
+            System.out.println("Producto con eL ID: " + codigoProducto  + " no encontrado");
+        }
+        System.out.println("INGRESA EL VALOR UNITARIO DEl PRODUCTO: ");
+        Double valorUnitario = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
+        int cantidadProducto= scanner.nextInt();
+        scanner.nextLine();
+        double valorTotal = valorUnitario * cantidadProducto;
+
+        Compra compra = new Compra(idCompra,nombreProveedor,fechaCompra,valorUnitario,valorTotal,nitProveedor);
+        administracion.agregarCompra(compra);
+        System.out.println(compra.toString());
+
 
     }
     public static void modificarCompra(Administracion administracion){

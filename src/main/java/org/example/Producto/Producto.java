@@ -11,10 +11,18 @@ public  class Producto  {
     private  String tipoMedidaProducto;
     private String etiquetaProducto;
     private String categoriaProducto;
-    private Double cantidadProducto;
+    private Double cantidadProducto =0.0;
     private List<Producto> productoList = new ArrayList<>();
 
+    public  Producto(String codigoProducto,String nombreProducto,Double cantidadProducto)
+    {   //Metodo constructor para llamar a producto desde compra
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
+    }
+
     public Producto(String codigoProducto, String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, Double cantidadProducto) {
+        //Metodo principal para crear el producto
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.marcaProducto = marcaProducto;
