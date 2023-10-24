@@ -65,6 +65,15 @@ public class Administracion {
                     return Optional.of(productoEncontrado);
                 })
                 .orElse(Optional.empty());
+
+
+    }
+
+    public void agregarCompra(Compra compra)
+    {
+        if (!compraList.contains(compra)) {
+            compraList.add(compra);
+        }
     }
 
 

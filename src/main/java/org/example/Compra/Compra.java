@@ -1,32 +1,42 @@
 package org.example.Compra;
 
+import org.example.Producto.Producto;
+
 import java.util.Date;
+import java.util.List;
 
 public class Compra {
 
-    final String idCompra;
+    private String idCompra;
+    private int nitProveedor;
     String nombreProveedor;
-    Date fechaCompra;
+    String fechaCompra;
     private Double valorUnitario;
     private Double valorTotal;
-
-    private Integer nitProveedor;
-    private Double valorUniCompra;
-    private Double valorTotalCompra;
-
-    public Compra(String idCompra, String nombreProveedor, Date fechaCompra, Double valorUnitario, Double valorTotal, Integer nitProveedor, Double valorUniCompra, Double valorTotalCompra) {
+    private List<Producto> productosCompra;
+    public Compra(String idCompra, String nombreProveedor, String fechaCompra, Double valorUnitario, Double valorTotal, Integer nitProveedor) {
         this.idCompra = idCompra;
         this.nombreProveedor = nombreProveedor;
         this.fechaCompra = fechaCompra;
         this.valorUnitario = valorUnitario;
         this.valorTotal = valorTotal;
         this.nitProveedor = nitProveedor;
-        this.valorUniCompra = valorUniCompra;
-        this.valorTotalCompra = valorTotalCompra;
-    }
 
+    }
     public String getIdCompra() {
         return idCompra;
+    }
+
+    public void setIdCompra(String idCompra) {
+        this.idCompra = idCompra;
+    }
+
+    public Integer getNitProveedor() {
+        return nitProveedor;
+    }
+
+    public void setNitProveedor(Integer nitProveedor) {
+        this.nitProveedor = nitProveedor;
     }
 
     public String getNombreProveedor() {
@@ -37,11 +47,11 @@ public class Compra {
         this.nombreProveedor = nombreProveedor;
     }
 
-    public Date getFechaCompra() {
+    public String getFechaCompra() {
         return fechaCompra;
     }
 
-    public void setFechaCompra(Date fechaCompra) {
+    public void setFechaCompra(String fechaCompra) {
         this.fechaCompra = fechaCompra;
     }
 
@@ -61,41 +71,24 @@ public class Compra {
         this.valorTotal = valorTotal;
     }
 
-    public Integer getNitProveedor() {
-        return nitProveedor;
+    public List<Producto> getProductosCompra() {
+        return productosCompra;
     }
 
-    public void setNitProveedor(Integer nitProveedor) {
-        this.nitProveedor = nitProveedor;
-    }
-
-    public Double getValorUniCompra() {
-        return valorUniCompra;
-    }
-
-    public void setValorUniCompra(Double valorUniCompra) {
-        this.valorUniCompra = valorUniCompra;
-    }
-
-    public Double getValorTotslCompra() {
-        return valorTotalCompra;
-    }
-
-    public void setValorTotslCompra(Double valorTotslCompra) {
-        this.valorTotalCompra = valorTotslCompra;
+    public void setProductosCompra(List<Producto> productosCompra) {
+        this.productosCompra = productosCompra;
     }
 
     @Override
     public String toString() {
         return "Compra{" +
                 "idCompra='" + idCompra + '\'' +
+                ", nitProveedor=" + nitProveedor +
                 ", nombreProveedor='" + nombreProveedor + '\'' +
                 ", fechaCompra=" + fechaCompra +
                 ", valorUnitario=" + valorUnitario +
                 ", valorTotal=" + valorTotal +
-                ", nitProveedor=" + nitProveedor +
-                ", valorUniCompra=" + valorUniCompra +
-                ", valorTotslCompra=" + valorTotalCompra +
+                ", productosCompra=" + productosCompra +
                 '}';
     }
 }
