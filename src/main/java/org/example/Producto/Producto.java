@@ -11,7 +11,7 @@ public  class Producto  {
     private  String tipoMedidaProducto;
     private String etiquetaProducto;
     private String categoriaProducto;
-    private Double cantidadProducto =0.0;
+    private Double cantidadProducto;
     private List<Producto> productoList = new ArrayList<>();
 
     public  Producto(String codigoProducto,String nombreProducto,Double cantidadProducto)

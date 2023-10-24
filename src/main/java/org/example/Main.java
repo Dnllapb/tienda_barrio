@@ -79,8 +79,7 @@ public class Main {
         System.out.println("INGRESA  LA CATEGORIA DEL PRODUCTO : ");
         String  categoriaProducto =  scanner.nextLine();
 
-        System.out.println("INGRESA LA CANTIDAD DEL PRODUCTO: ");
-        Double cantidadProducto = scanner.nextDouble();
+        Double cantidadProducto = 0.0;
         scanner.nextLine();
         Producto producto = new Producto(codigoProducto, nombreProducto, marcaProducto, tipoEmpaque,medidaProducto,tipoMedidaProducto,etiquetaProducto,categoriaProducto,cantidadProducto) {
         };
@@ -203,6 +202,7 @@ public class Main {
 
     }
     public static void modificarCompra(Administracion administracion){
+
 
     }
     public static void buscarCompra(Administracion administracion){
