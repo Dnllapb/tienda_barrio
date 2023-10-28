@@ -18,7 +18,7 @@ public  class Producto  {
 
 
 
-    public Producto(String codigoProducto, String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, Double cantidadProducto) {
+    public Producto(String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, Double cantidadProducto) {
         //Metodo principal para crear el producto
         this.codigoProducto = String.valueOf(contadorID);
         this.nombreProducto = nombreProducto;

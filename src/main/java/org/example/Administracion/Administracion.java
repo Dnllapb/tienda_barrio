@@ -22,9 +22,6 @@ public class Administracion implements AdministracionI {
     {
         //REGISTRAR NUEVO PRODUCTO
         Scanner scanner = new Scanner(System.in);
-        System.out.println("INGRESA EL CODIGO DEL PRODUCTO : ");
-        String codigoProducto = scanner.nextLine();
-
 
         System.out.println("INGRESA EL NOMBRE DEL PRODUCTO: ");
         String nombreProducto = scanner.nextLine();
@@ -49,7 +46,7 @@ public class Administracion implements AdministracionI {
         String  categoriaProducto =  scanner.nextLine();
 
         Double cantidadProducto = 0.0;
-        Producto producto = new Producto(codigoProducto, nombreProducto, marcaProducto, tipoEmpaque,medidaProducto,tipoMedidaProducto,etiquetaProducto,categoriaProducto,cantidadProducto) {
+        Producto producto = new Producto( nombreProducto, marcaProducto, tipoEmpaque,medidaProducto,tipoMedidaProducto,etiquetaProducto,categoriaProducto,cantidadProducto) {
         };
         administracion.agregarProducto(producto);
         System.out.println(producto.toString());
