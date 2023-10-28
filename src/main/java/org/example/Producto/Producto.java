@@ -3,7 +3,7 @@ package org.example.Producto;
 import java.util.*;
 
 public  class Producto  {
-    final String codigoProducto ;
+    private String codigoProducto ;
     private String nombreProducto;
     private String marcaProducto;
     private String tipoEmpaque;
@@ -12,18 +12,15 @@ public  class Producto  {
     private String etiquetaProducto;
     private String categoriaProducto;
     private Double cantidadProducto;
+    private  static int contadorID = 1 ;
     private List<Producto> productoList = new ArrayList<>();
 
-    public  Producto(String codigoProducto,String nombreProducto,Double cantidadProducto)
-    {   //Metodo constructor para llamar a producto desde compra
-        this.codigoProducto = codigoProducto;
-        this.nombreProducto = nombreProducto;
-        this.cantidadProducto = cantidadProducto;
-    }
+
+
 
     public Producto(String codigoProducto, String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, Double cantidadProducto) {
         //Metodo principal para crear el producto
-        this.codigoProducto = codigoProducto;
+        this.codigoProducto = String.valueOf(contadorID);
         this.nombreProducto = nombreProducto;
         this.marcaProducto = marcaProducto;
         this.tipoEmpaque = tipoEmpaque;
@@ -32,13 +29,21 @@ public  class Producto  {
         this.etiquetaProducto = etiquetaProducto;
         this.categoriaProducto = categoriaProducto;
         this.cantidadProducto = cantidadProducto;
+        contadorID++;
 
+    }
+    public  Producto(String codigoProducto,String nombreProducto,Double cantidadProducto)
+    {   //Metodo constructor para llamar a producto desde compra
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+        this.cantidadProducto = cantidadProducto;
     }
 
     public String getCodigoProducto() {
         return codigoProducto;
     }
-
+    public void setCodigoProducto(String codigoProducto)
+    {this.codigoProducto = codigoProducto;}
     public String getNombreProducto() {
         return nombreProducto;
     }
@@ -118,4 +123,6 @@ public  class Producto  {
                 ", productoList=" + productoList +
                 '}';
     }
+
+
 }
