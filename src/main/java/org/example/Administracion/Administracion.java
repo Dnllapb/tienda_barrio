@@ -166,7 +166,49 @@ public class Administracion implements AdministracionI {
     }
 
 
+    public Compra agregarCompra(Administracion administracion) {
+        //REGISTRAR NUEVA COMPRA DE PRODUCTO
+        Compra compra = null;
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
+            int nitProveedor = scanner.nextInt();
+            scanner.nextLine();
+            System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
+            String nombreProveedor = scanner.next();
+            scanner.nextLine();
+            System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
+            String codigoProducto = scanner.next();
+            scanner.nextLine();
 
+            Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto);
+            if (productoOptional.isPresent()) {
+                Producto productosCompra = productoOptional.get();
+                System.out.println(productosCompra.getNombreProducto());
+                System.out.println("INGRESA EL VALOR UNITARIO DEl PRODUCTO: ");
+                Double valorUnitario = scanner.nextDouble();
+                scanner.nextLine();
+                System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
+                int cantidadProducto = scanner.nextInt();
+                scanner.nextLine();
+                productosCompra.setCantidadProducto(productosCompra.getCantidadProducto() + cantidadProducto);
+                double valorTotal = valorUnitario * cantidadProducto;
+
+                compra = new Compra(nombreProveedor, valorUnitario, valorTotal, cantidadProducto, nitProveedor, Optional.of(productosCompra));
+                administracion.agregarCompra(compra);
+                System.out.println(compra.toString());
+
+
+            } else {
+                System.out.println("Producto con eL ID: " + codigoProducto + " no encontrado");
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return compra;
+
+    }
     public void agregarCompra(Compra compra)
     {
         if (!compraList.contains(compra)) {
@@ -175,6 +217,21 @@ public class Administracion implements AdministracionI {
     }
 
 
+    public Optional<Compra> buscarCompra(Administracion administracion){
+
+        System.out.println("INGRESA EL CODIGO DE LA COMPRA A BUSCAR : ");
+        Scanner scanner = new Scanner(System.in);
+        String codigoCompra = scanner.next();
+        scanner.nextLine();
+
+        Optional<Compra> compraOptional = administracion.buscarCompra(codigoCompra);
+        if (compraOptional.isPresent()) {
+            System.out.println(compraOptional.get());
+        } else {
+            System.out.println("Compra con eL ID: " + compraOptional  + " no encontrado");
+        }
+        return  compraOptional;
+    }
 
     public Optional<Compra> buscarCompra(String codigoCompra){
         return compraList.stream()

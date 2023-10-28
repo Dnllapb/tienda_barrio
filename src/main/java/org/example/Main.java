@@ -1,11 +1,7 @@
 package org.example;
 import org.example.Administracion.Administracion;
 import org.example.Compra.Compra;
-import org.example.Producto.Producto;
-import org.example.Venta.Venta;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -26,13 +22,13 @@ public class Main {
                     administracion.consultarProducto(administracion);
                     break;
                 case 4 :
-                    agregarCompra(administracion);
+                    administracion.agregarCompra(administracion);
                     break;
                 case 5 :
                     modificarCompra(administracion);
                     break;
                 case 6 :
-                    buscarCompra(administracion);
+                   administracion.buscarCompra(administracion);
                     break;
                 case 7 :
                     agregarVenta(administracion);
@@ -68,46 +64,7 @@ public class Main {
     }*/
 
 
-    public Compra agregarCompra(Administracion administracion){
-        //REGISTRAR NUEVA COMPRA DE PRODUCTO
-        try {
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
-            int nitProveedor = scanner.nextInt();
-            scanner.nextLine();
-            System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
-            String nombreProveedor = scanner.next();
-            scanner.nextLine();
-            System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
-            String codigoProducto = scanner.next();
-            scanner.nextLine();
 
-            Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto );
-            if (productoOptional.isPresent() ) {
-                Producto productosCompra = productoOptional.get();
-                System.out.println(productosCompra.getNombreProducto());
-                System.out.println("INGRESA EL VALOR UNITARIO DEl PRODUCTO: ");
-                Double valorUnitario = scanner.nextDouble();
-                scanner.nextLine();
-                System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
-                int cantidadProducto= scanner.nextInt();
-                scanner.nextLine();
-                productosCompra.setCantidadProducto(productosCompra.getCantidadProducto() + cantidadProducto);
-                double valorTotal = valorUnitario * cantidadProducto;
-
-                Compra compra = new Compra(nombreProveedor,valorUnitario,valorTotal,cantidadProducto,nitProveedor,Optional.of(productosCompra));
-                administracion.agregarCompra(compra);
-                System.out.println(compra.toString());
-            } else {
-                System.out.println("Producto con eL ID: " + codigoProducto  + " no encontrado");
-            }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        return agregarCompra(administracion);
-
-    }
     public static void modificarCompra(Administracion administracion){
         System.out.println("INGRESA EL CODIGO DE LA COMPRA A MODIFICAR : ");
         Scanner scanner = new Scanner(System.in);
@@ -137,27 +94,12 @@ public class Main {
             System.out.println("Producto no encontrado.");
             System.out.println(" ");
         }
-/*        Compra compra = new Compra(codigoCompra,opcion,nuevoValor);
-        administracion.modificarCompra(compra);
-        System.out.println(compra.toString());*/
+
 
 
 
     }
-    public static void buscarCompra(Administracion administracion){
 
-        System.out.println("INGRESA EL CODIGO DE LA COMPRA A BUSCAR : ");
-        Scanner scanner = new Scanner(System.in);
-        String codigoCompra = scanner.next();
-        scanner.nextLine();
-
-        Optional<Compra> compraOptional = administracion.buscarCompra(codigoCompra);
-        if (compraOptional.isPresent()) {
-            System.out.println(compraOptional.get());
-        } else {
-            System.out.println("Compra con eL ID: " + compraOptional  + " no encontrado");
-        }
-    }
     public static void agregarVenta(Administracion administracion){
 
     }
