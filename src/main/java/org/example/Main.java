@@ -1,11 +1,7 @@
 package org.example;
 import org.example.Administracion.Administracion;
 import org.example.Compra.Compra;
-import org.example.Producto.Producto;
-import org.example.Venta.Venta;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -32,7 +28,7 @@ public class Main {
                     modificarCompra(administracion);
                     break;
                 case 6 :
-                    buscarCompra(administracion);
+                   administracion.buscarCompra(administracion);
                     break;
                 case 7 :
                     agregarVenta(administracion);
@@ -98,27 +94,12 @@ public class Main {
             System.out.println("Producto no encontrado.");
             System.out.println(" ");
         }
-/*        Compra compra = new Compra(codigoCompra,opcion,nuevoValor);
-        administracion.modificarCompra(compra);
-        System.out.println(compra.toString());*/
+
 
 
 
     }
-    public static void buscarCompra(Administracion administracion){
 
-        System.out.println("INGRESA EL CODIGO DE LA COMPRA A BUSCAR : ");
-        Scanner scanner = new Scanner(System.in);
-        String codigoCompra = scanner.next();
-        scanner.nextLine();
-
-        Optional<Compra> compraOptional = administracion.buscarCompra(codigoCompra);
-        if (compraOptional.isPresent()) {
-            System.out.println(compraOptional.get());
-        } else {
-            System.out.println("Compra con eL ID: " + compraOptional  + " no encontrado");
-        }
-    }
     public static void agregarVenta(Administracion administracion){
 
     }

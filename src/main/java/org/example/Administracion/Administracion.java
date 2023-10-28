@@ -217,6 +217,21 @@ public class Administracion implements AdministracionI {
     }
 
 
+    public Optional<Compra> buscarCompra(Administracion administracion){
+
+        System.out.println("INGRESA EL CODIGO DE LA COMPRA A BUSCAR : ");
+        Scanner scanner = new Scanner(System.in);
+        String codigoCompra = scanner.next();
+        scanner.nextLine();
+
+        Optional<Compra> compraOptional = administracion.buscarCompra(codigoCompra);
+        if (compraOptional.isPresent()) {
+            System.out.println(compraOptional.get());
+        } else {
+            System.out.println("Compra con eL ID: " + compraOptional  + " no encontrado");
+        }
+        return  compraOptional;
+    }
 
     public Optional<Compra> buscarCompra(String codigoCompra){
         return compraList.stream()
