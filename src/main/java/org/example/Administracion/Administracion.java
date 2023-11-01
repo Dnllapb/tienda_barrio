@@ -16,15 +16,10 @@ public class Administracion implements AdministracionI {
     private List <Producto> productoList = new ArrayList<>();
     private List <Compra> compraList = new ArrayList<>();
     private List <Venta> ventaList = new ArrayList<>();
-
-
     public Producto crearProducto(Administracion administracion)
     {
         //REGISTRAR NUEVO PRODUCTO
         Scanner scanner = new Scanner(System.in);
-        System.out.println("INGRESA EL CODIGO DEL PRODUCTO : ");
-        String codigoProducto = scanner.nextLine();
-
 
         System.out.println("INGRESA EL NOMBRE DEL PRODUCTO: ");
         String nombreProducto = scanner.nextLine();
@@ -48,13 +43,12 @@ public class Administracion implements AdministracionI {
         System.out.println("INGRESA  LA CATEGORIA DEL PRODUCTO : ");
         String  categoriaProducto =  scanner.nextLine();
 
-        Double cantidadProducto = 0.0;
-        Producto producto = new Producto(codigoProducto, nombreProducto, marcaProducto, tipoEmpaque,medidaProducto,tipoMedidaProducto,etiquetaProducto,categoriaProducto,cantidadProducto) {
+      int cantidadProducto =0;
+        Producto producto = new Producto( nombreProducto, marcaProducto, tipoEmpaque,medidaProducto,tipoMedidaProducto,etiquetaProducto,categoriaProducto,cantidadProducto) {
         };
         administracion.agregarProducto(producto);
         System.out.println(producto.toString());
         return producto;
-
     }
     public void agregarProducto(Producto producto){
         if (!productoList.contains(producto)) {
@@ -66,10 +60,8 @@ public class Administracion implements AdministracionI {
                 .filter(producto -> producto.getCodigoProducto()!= null && producto.getCodigoProducto().equals(codigoProducto))
                 .findAny();
     }
-
     public Optional<Producto>  consultarProducto(Administracion administracion)
     {
-
         System.out.println("INGRESA EL CODIGO DEL PRODUCTO A BUSCAR : ");
         Scanner scanner = new Scanner(System.in);
         String codigoProducto = scanner.next();
@@ -83,7 +75,6 @@ public class Administracion implements AdministracionI {
         }
         return productoOptional;
     }
-
     public Optional<Producto> modificarProducto(Administracion administracion)
     {
         System.out.println("INGRESA EL CODIGO DEL PRODUCTO A BUSCAR : ");
@@ -122,10 +113,8 @@ public class Administracion implements AdministracionI {
             System.out.println("Producto no encontrado.");
             System.out.println(" ");
         }
-
         return  productoEncontrado;
     }
-
     public Optional<Producto> modificarProducto(String codigoProducto, String opcion, String nuevoValor) {
         return productoList.stream()
                 .filter(producto -> producto.getCodigoProducto().equals(codigoProducto))
@@ -154,7 +143,7 @@ public class Administracion implements AdministracionI {
                             productoEncontrado.setCategoriaProducto(nuevoValor);
                             break;
                         case "8":
-                            productoEncontrado.setCantidadProducto(Double.valueOf(nuevoValor));
+                            productoEncontrado.setCantidadProducto(Integer.valueOf(nuevoValor));
                             break;
                         default:
                             System.out.println("Opción no válida.");
@@ -164,8 +153,6 @@ public class Administracion implements AdministracionI {
                 })
                 .orElse(Optional.empty());
     }
-
-
     public Compra agregarCompra(Administracion administracion) {
         //REGISTRAR NUEVA COMPRA DE PRODUCTO
         Compra compra = null;
@@ -192,13 +179,11 @@ public class Administracion implements AdministracionI {
                 int cantidadProducto = scanner.nextInt();
                 scanner.nextLine();
                 productosCompra.setCantidadProducto(productosCompra.getCantidadProducto() + cantidadProducto);
-                double valorTotal = valorUnitario * cantidadProducto;
 
-                compra = new Compra(nombreProveedor, valorUnitario, valorTotal, cantidadProducto, nitProveedor, Optional.of(productosCompra));
+                double valorTotal = valorUnitario * cantidadProducto;
+                compra = new Compra(nombreProveedor, valorUnitario, valorTotal,  cantidadProducto , nitProveedor, Optional.of(productosCompra));
                 administracion.agregarCompra(compra);
                 System.out.println(compra.toString());
-
-
             } else {
                 System.out.println("Producto con eL ID: " + codigoProducto + " no encontrado");
             }
@@ -207,7 +192,6 @@ public class Administracion implements AdministracionI {
             throw new RuntimeException(e);
         }
         return compra;
-
     }
     public void agregarCompra(Compra compra)
     {
@@ -215,8 +199,6 @@ public class Administracion implements AdministracionI {
             compraList.add(compra);
         }
     }
-
-
     public Optional<Compra> buscarCompra(Administracion administracion){
 
         System.out.println("INGRESA EL CODIGO DE LA COMPRA A BUSCAR : ");
@@ -232,15 +214,12 @@ public class Administracion implements AdministracionI {
         }
         return  compraOptional;
     }
-
     public Optional<Compra> buscarCompra(String codigoCompra){
         return compraList.stream()
                 .filter(compra -> compra.getIdCompra().equals(codigoCompra))
                 .findAny();
     }
-
     public Optional<Compra> modificarCompra(String codigoCompra,int  opcion, String nuevoValor) {
-
         return compraList.stream()
                 .filter(compra -> compra.getIdCompra().equals(codigoCompra))
                 .findFirst()
@@ -259,7 +238,7 @@ public class Administracion implements AdministracionI {
                             // Actualiza la cantidad del producto original
                             Producto producto = compraEncontrada.getProductoOptional().orElse(null);
                             if (producto != null) {
-                                producto.setCantidadProducto(producto.getCantidadProducto() - compraEncontrada.getCantidadProducto());
+                                producto.setCantidadProducto((producto.getCantidadProducto() - compraEncontrada.getCantidadProducto()));
                             }
                             compraEncontrada.setProductoOptional(null); // Establecer como null
 
@@ -275,7 +254,7 @@ public class Administracion implements AdministracionI {
 
 
                                 System.out.println("POR FAVOR INGRESA LA CANTIDAD ");
-                                Double nuevaCantidad = scanner.nextDouble();
+                                int nuevaCantidad = scanner.nextInt();
                                 scanner.nextLine();
                                 compraEncontrada.setCantidadProducto(nuevaCantidad);
 

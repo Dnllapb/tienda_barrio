@@ -11,16 +11,12 @@ public  class Producto  {
     private  String tipoMedidaProducto;
     private String etiquetaProducto;
     private String categoriaProducto;
-    private Double cantidadProducto;
-    private  static int contadorID = 1 ;
+    private int cantidadProducto;
+    private  static int contadorID =  0;
     private List<Producto> productoList = new ArrayList<>();
-
-
-
-
-    public Producto(String codigoProducto, String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, Double cantidadProducto) {
+    public Producto(String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, int cantidadProducto) {
         //Metodo principal para crear el producto
-        this.codigoProducto = String.valueOf(contadorID);
+        this.codigoProducto = String.valueOf(++contadorID);
         this.nombreProducto = nombreProducto;
         this.marcaProducto = marcaProducto;
         this.tipoEmpaque = tipoEmpaque;
@@ -32,7 +28,7 @@ public  class Producto  {
         contadorID++;
 
     }
-    public  Producto(String codigoProducto,String nombreProducto,Double cantidadProducto)
+    public  Producto(String codigoProducto,String nombreProducto,int cantidadProducto)
     {   //Metodo constructor para llamar a producto desde compra
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
@@ -100,11 +96,11 @@ public  class Producto  {
         this.categoriaProducto = categoriaProducto;
     }
 
-    public Double getCantidadProducto() {
+    public int getCantidadProducto() {
         return cantidadProducto;
     }
 
-    public void setCantidadProducto(Double cantidadProducto) {
+    public void setCantidadProducto(int  cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
     }
 
