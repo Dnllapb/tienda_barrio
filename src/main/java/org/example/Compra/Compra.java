@@ -16,14 +16,12 @@ public class Compra {
     private Double valorUnitario;
     private Double valorTotal;
     private Producto productoComprado;// producto comprar me guarda la clase Producto
-    private Double cantidadProducto; //atributo de la clase producto
-    private String nombreProducto;
-    private String codigoProducto;
+    private int cantidadProducto; //atributo de la clase producto
 
     private Optional<Producto> productoOptional; //Contiene el objeto producto
 
     private List<Producto> productosCompra;
-    public Compra(String nombreProveedor, Double valorUnitario, Double valorTotal, Integer nitProveedor, int proveedor, Optional<Producto> productoOptional) {
+    public Compra(String nombreProveedor, Double valorUnitario, Double valorTotal, int nitProveedor, int cantidadProducto,Optional<Producto> productoOptional) {
         this.idCompra = String.valueOf(++contadorId);
         this.nombreProveedor = nombreProveedor;
         this.fechaCompra = LocalDateTime.now();//Cambio de string por LocalDateTime
@@ -31,62 +29,47 @@ public class Compra {
         this.valorTotal = valorTotal;
         this.nitProveedor = nitProveedor;
         this.productoOptional = productoOptional;
-
-
+        this.cantidadProducto = cantidadProducto;
     }
-
     public String getIdCompra() {
         return idCompra;
     }
-
     public void setIdCompra(String idCompra) {
         this.idCompra = idCompra;
     }
-
     public Integer getNitProveedor() {
         return nitProveedor;
     }
-
     public void setNitProveedor(Integer nitProveedor) {
         this.nitProveedor = nitProveedor;
     }
-
     public String getNombreProveedor() {
         return nombreProveedor;
     }
-
     public void setNombreProveedor(String nombreProveedor) {
         this.nombreProveedor = nombreProveedor;
     }
-
     public Double getValorUnitario() {
         return valorUnitario;
     }
-
     public void setValorUnitario(Double valorUnitario) {
         this.valorUnitario = valorUnitario;
     }
-
     public Double getValorTotal() {
         return valorTotal;
     }
-
     public void setValorTotal(Double valorTotal) {
         this.valorTotal = valorTotal;
     }
-
     public List<Producto> getProductosCompra() {
         return productosCompra;
     }
-    public Double getCantidadProducto() {
+    public int getCantidadProducto() {
         return cantidadProducto;
     }
-
-    public void setCantidadProducto(Double cantidadProducto) {
+    public void setCantidadProducto(int cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
     }
-
-
 
    /* public void setProductosCompra(List<Producto> productosCompra) {
         this.productosCompra = productosCompra;
@@ -109,9 +92,7 @@ public class Compra {
         this.productoComprado = productoComprado;
     }
 
-    public Double getCantidadProducto() {
-        return cantidadProducto;
-    }
+
 
     public void setCantidadProducto(Double cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
@@ -141,19 +122,19 @@ public class Compra {
     public String toString() {
 
         String informacionProducto = productoOptional.isPresent() ?
-                "Id producto =" + this.productoOptional.get().getCodigoProducto() +
-                "Nombre producto =" + this.productoOptional.get().getNombreProducto() :
+                "Id producto =\n" + this.productoOptional.get().getCodigoProducto() +
+                "Nombre producto = \n" + this.productoOptional.get().getNombreProducto() :
                 "Producto no asociado";
 
-        return "Compra{" +
-                "idCompra='" + idCompra + '\'' +
-                ", nitProveedor=" + nitProveedor +
-                ", nombreProveedor='" + nombreProveedor + '\'' +
-                ", fechaCompra=" + fechaCompra  + '\'' +
+        return "Compra registrada \n" +
+                "Codigo compra =\n'" + idCompra + '\'' +
+                ", Nit proveedor= \n" + nitProveedor +
+                ", Nombre proveedor=\n'" + nombreProveedor + '\'' +
+                ", Fecha compra=\n" + fechaCompra  + '\'' +
                 informacionProducto +
-                "Cantidad " + cantidadProducto+
-                ", valorUnitario=" + valorUnitario +
-                ", valorTotal=" + valorTotal +
-                '}';
+                "Cantidad productos \n " + cantidadProducto +
+                ", valorUnitario= \n" + valorUnitario +
+                ", valorTotal=\n" + valorTotal
+                ;
     }
 }
