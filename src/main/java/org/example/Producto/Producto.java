@@ -13,6 +13,7 @@ public  class Producto  {
     private String categoriaProducto;
     private int cantidadProducto;
     private  static int contadorID =  0;
+    private  double valorUnitario;
     private List<Producto> productoList = new ArrayList<>();
     public Producto(String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, int cantidadProducto) {
         //Metodo principal para crear el producto
@@ -25,14 +26,15 @@ public  class Producto  {
         this.etiquetaProducto = etiquetaProducto;
         this.categoriaProducto = categoriaProducto;
         this.cantidadProducto = cantidadProducto;
-        contadorID++;
+
 
     }
-    public  Producto(String codigoProducto,String nombreProducto,int cantidadProducto)
+    public  Producto(String codigoProducto,String nombreProducto,int cantidadProducto,Double valorUnitario)
     {   //Metodo constructor para llamar a producto desde compra
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.cantidadProducto = cantidadProducto;
+        this.valorUnitario = valorUnitario;
     }
 
     public String getCodigoProducto() {
@@ -102,6 +104,14 @@ public  class Producto  {
 
     public void setCantidadProducto(int  cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
+    }
+
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
     @Override

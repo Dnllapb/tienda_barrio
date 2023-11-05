@@ -31,6 +31,14 @@ public class Compra {
         this.productoOptional = productoOptional;
         this.cantidadProducto = cantidadProducto;
     }
+
+    public Compra() {
+    }
+
+    public Compra(String nombreProveedor, double valorTotalCompra, int nitProveedor, List<Producto> productosComprados) {
+   //constructor para poder agregar mas productos
+    }
+
     public String getIdCompra() {
         return idCompra;
     }
@@ -70,6 +78,7 @@ public class Compra {
     public void setCantidadProducto(int cantidadProducto) {
         this.cantidadProducto = cantidadProducto;
     }
+
 
    /* public void setProductosCompra(List<Producto> productosCompra) {
         this.productosCompra = productosCompra;
@@ -118,23 +127,40 @@ public class Compra {
         this.productoOptional = productoOptional;
     }
 
+
     @Override
     public String toString() {
 
-        String informacionProducto = productoOptional.isPresent() ?
-                "Id producto =\n" + this.productoOptional.get().getCodigoProducto() +
-                "Nombre producto = \n" + this.productoOptional.get().getNombreProducto() :
-                "Producto no asociado";
+       String informacionProducto = productoOptional.isPresent()   ?
+               "Id producto =\n" + this.productoOptional.get().getCodigoProducto() +
+                       "Nombre producto = \n" + this.productoOptional.get().getNombreProducto() :
+               "Producto no asociado" ;
 
-        return "Compra registrada \n" +
-                "Codigo compra =\n'" + idCompra + '\'' +
-                ", Nit proveedor= \n" + nitProveedor +
-                ", Nombre proveedor=\n'" + nombreProveedor + '\'' +
-                ", Fecha compra=\n" + fechaCompra  + '\'' +
-                informacionProducto +
-                "Cantidad productos \n " + cantidadProducto +
-                ", valorUnitario= \n" + valorUnitario +
-                ", valorTotal=\n" + valorTotal
-                ;
-    }
+       return "Compra registrada \n" +
+               "Codigo compra =\n'" + idCompra + '\'' +
+               ", Nit proveedor= \n" + nitProveedor +
+               ", Nombre proveedor=\n'" + nombreProveedor + '\'' +
+               ", Fecha compra=\n" + fechaCompra + '\'' +
+               informacionProducto +
+               "Cantidad productos \n " + cantidadProducto +
+               ", valorUnitario= \n" + valorUnitario +
+               ", valorTotal=\n" + valorTotal
+               ;
+   }
+
+/*   @Override
+    public String toString() {
+        return "Compra{" +
+                "idCompra='" + idCompra + '\'' +
+                ", nitProveedor=" + nitProveedor +
+                ", nombreProveedor='" + nombreProveedor + '\'' +
+                ", fechaCompra=" + fechaCompra +
+                ", valorUnitario=" + valorUnitario +
+                ", valorTotal=" + valorTotal +
+                ", productoComprado=" + productoComprado +
+                ", cantidadProducto=" + cantidadProducto +
+                ", productoOptional=" + productoOptional +
+                ", productosCompra=" + productosCompra +
+                '}';
+    }*/
 }

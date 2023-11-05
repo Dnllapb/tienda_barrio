@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
 
         Administracion administracion = new Administracion();
+        Compra compra = new Compra();
         int opciones = ejecutarMenu();
         while (opciones != 7){
             switch (opciones) {
