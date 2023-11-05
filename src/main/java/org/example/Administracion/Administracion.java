@@ -5,10 +5,7 @@ import org.example.Interfaces.AdministracionI;
 import org.example.Producto.Producto;
 import org.example.Venta.Venta;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 
 public class Administracion implements AdministracionI {
 
@@ -153,46 +150,209 @@ public class Administracion implements AdministracionI {
                 })
                 .orElse(Optional.empty());
     }
+
+
+
+/*    public Boolean compraTest(Administracion administracion, Compra compra, String nombreProveedor, Integer nitProveedor){
+
+
+        System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
+        String codigoProducto = scanner.next();
+        scanner.nextLine();
+        List<Producto> productosCompra = new ArrayList<>();
+
+        Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto);
+
+        if (!productoOptional.isEmpty()){
+            administracion.agregarProductoCompra(productoOptional, compra,nombreProveedor, nitProveedor, productosCompra);
+        }else{
+            System.out.println("No se encontro el producto");
+        }
+        System.out.println("Deseas agregar más productos a la compra (S/N)?: ");
+        String respuesta = scanner.next();
+        return "s".equalsIgnoreCase(respuesta);
+    }
+
+    public void agregarCompra (Administracion administracion, Compra compra){
+
+            System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
+            String nombreProveedor = scanner.next();
+            System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
+            int nitProveedor = scanner.nextInt();
+
+
+
+        Boolean agregarProducto = true;
+
+
+        while (agregarProducto){
+            agregarProducto = compraTest(administracion, compra, nombreProveedor, nitProveedor);
+        }
+        administracion.agregarCompra(compra);
+               System.out.println(compra.toString());
+
+    }
+
+
+
+
+        public void agregarProductoCompra (Optional<Producto> productoOptional, Compra compra, String nombreProveedor, Integer nitProveedor, List<Producto> productosCompra){
+
+        Producto productoCompra = productoOptional.get();
+        if (!productoOptional.isEmpty()) {
+System.out.println(productoCompra.getNombreProducto());
+            System.out.println("INGRESA EL VALOR UNITARIO DEL PRODUCTO: ");
+            Double valorUnitario = scanner.nextDouble();
+            scanner.nextLine();
+            System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
+            int cantidadProducto = scanner.nextInt();
+            scanner.nextLine();
+
+            productoCompra.setCantidadProducto(productoCompra.getCantidadProducto() + cantidadProducto);
+            double valorTotal = valorUnitario * cantidadProducto;
+
+            compra = new Compra(nombreProveedor, valorUnitario, valorTotal, cantidadProducto, nitProveedor, Optional.of(productoCompra));
+            productosCompra.add(productoCompra);
+        }else {
+            System.out.println("Producto no encontrado");
+        }
+        }*/
+
+    public void datosProveedor(Compra compra)
+    {
+
+
+    }
+
     public Compra agregarCompra(Administracion administracion) {
         //REGISTRAR NUEVA COMPRA DE PRODUCTO
-        Compra compra = null;
+            Compra compra = null;
+            try {
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
+                int nitProveedor = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
+                String nombreProveedor = scanner.next();
+                scanner.nextLine();
+
+                List<Producto> productosComprados = new ArrayList<>(); // Lista para almacenar productos comprados
+
+                boolean continuarAgregando = true;
+                while (continuarAgregando) {
+                    System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
+                    String codigoProducto = scanner.next();
+                    scanner.nextLine();
+
+                    Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto);
+                    if (productoOptional.isPresent()) {
+                        Producto productosCompra = productoOptional.get();
+                        System.out.println(productosCompra.getNombreProducto());
+
+                        System.out.println("INGRESA EL VALOR UNITARIO DEL PRODUCTO: ");
+                        Double valorUnitario = scanner.nextDouble();
+                        scanner.nextLine();
+                        System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
+                        int cantidadProducto = scanner.nextInt();
+                        scanner.nextLine();
+
+                        productosCompra.setCantidadProducto(productosCompra.getCantidadProducto() + cantidadProducto);
+
+                        double valorTotal = (valorUnitario != null) ? valorUnitario * cantidadProducto : 0.0;
+
+                        // Agregar el producto comprado a la lista de productosComprados
+                        productosComprados.add(productosCompra);
+
+                        System.out.println("Desea agregar más productos a la compra? (true = si / false = no)");
+                        continuarAgregando = scanner.nextBoolean();
+                        scanner.nextLine();
+                    } else {
+                        System.out.println("Producto con el ID: " + codigoProducto + " no encontrado");
+                    }
+                }
+
+                // Calcular el valor total de la compra sumando los valores totales de los productos
+                double valorTotalCompra = productosComprados.stream()
+                        .mapToDouble(p -> p.getValorUnitario() * p.getCantidadProducto())
+                        .sum();
+
+                // Crear la compra con la lista de productos comprados
+                //compra = new Compra(nombreProveedor, valorTotalCompra, nitProveedor, Optional.of(productosCompra));
+                compra = new Compra(nombreProveedor, valorTotalCompra, nitProveedor, productosComprados);
+
+                administracion.agregarCompra(compra);
+                System.out.println(compra);
+                //System.out.println(compra.toString());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return compra;
+        }
+
+     /*   Compra compra = null;
+
+        Scanner scanner = new Scanner(System.in);
+
         try {
-            Scanner scanner = new Scanner(System.in);
             System.out.println("INGRESA EL NIT DEL PROVEEDOR : ");
             int nitProveedor = scanner.nextInt();
             scanner.nextLine();
             System.out.println("INGRESA EL NOMBRE DEL PROVEEDOR: ");
             String nombreProveedor = scanner.next();
             scanner.nextLine();
-            System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
-            String codigoProducto = scanner.next();
-            scanner.nextLine();
+            List<Producto> productosCompra = new ArrayList<>();
 
-            Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto);
-            if (productoOptional.isPresent()) {
-                Producto productosCompra = productoOptional.get();
-                System.out.println(productosCompra.getNombreProducto());
-                System.out.println("INGRESA EL VALOR UNITARIO DEl PRODUCTO: ");
-                Double valorUnitario = scanner.nextDouble();
+                System.out.println("INGRESA EL CODIGO DEL PRODUCTO A COMPRAR: ");
+                String codigoProducto = scanner.next();
                 scanner.nextLine();
-                System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
-                int cantidadProducto = scanner.nextInt();
-                scanner.nextLine();
-                productosCompra.setCantidadProducto(productosCompra.getCantidadProducto() + cantidadProducto);
 
-                double valorTotal = valorUnitario * cantidadProducto;
-                compra = new Compra(nombreProveedor, valorUnitario, valorTotal,  cantidadProducto , nitProveedor, Optional.of(productosCompra));
-                administracion.agregarCompra(compra);
-                System.out.println(compra.toString());
-            } else {
-                System.out.println("Producto con eL ID: " + codigoProducto + " no encontrado");
-            }
+                Optional<Producto> productoOptional = administracion.buscarProducto(codigoProducto);
+                if (productoOptional.isPresent()) {
+                    Producto productoCompra = productoOptional.get();
+                    System.out.println(productoCompra.getNombreProducto());
+                    System.out.println("INGRESA EL VALOR UNITARIO DEL PRODUCTO: ");
+                    Double valorUnitario = scanner.nextDouble();
+                    scanner.nextLine();
+                    System.out.println("INGRESA LA CANTIDAD A COMPRAR : ");
+                    int cantidadProducto = scanner.nextInt();
+                    scanner.nextLine();
+                    productoCompra.setCantidadProducto(productoCompra.getCantidadProducto() + cantidadProducto);
+                    double valorTotal = valorUnitario * cantidadProducto;
+                    compra = new Compra(nombreProveedor, valorUnitario, valorTotal, cantidadProducto, nitProveedor, Optional.of(productoCompra));
+                    productosCompra.add(productoCompra);
 
+                *//*    if(productoOptional.isPresent())
+                    {
+                        System.out.println("Deseas agregar más productos a la compra (S/N)?: ");
+                        Boolean respuesta = scanner.nextBoolean();
+                        if (respuesta == true) {
+                           agregarCompra(compra);
+                       }
+                    }
+                    else
+                    {
+                        System.out.println("Mensaje random");
+                    }*//*
+
+                } else {
+                    System.out.println("Producto con el ID: " + codigoProducto + " no encontrado");
+                }
+            administracion.agregarCompra(compra);
+            System.out.println(compra.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            scanner.close();
         }
+
         return compra;
+    }*/
+
+    public  void agregarMasProductos()
+    {
+
     }
+
     public void agregarCompra(Compra compra)
     {
         if (!compraList.contains(compra)) {
@@ -278,3 +438,29 @@ public class Administracion implements AdministracionI {
                 .orElse(Optional.empty());
     }
 }
+
+/*
+    @Override
+    public void remove() {
+        try {
+            System.out.print("Para eliminar el producto debe ingresar el codigo:  ");
+            code = impresion.nextInt();
+            int search = code;
+
+            Optional<Product> RemoveProduct = productList.stream()
+                    .filter(persona -> persona.getCode() == search)
+                    .findFirst();
+            if (RemoveProduct.isPresent()) {
+                System.out.println("Se elimino el producto exitosamente");
+
+                productList.removeIf(user -> user.getCode() == (search));
+                RemoveProduct.ifPresent(x-> System.out.println(x));
+            } else {
+                throw new Exception("El codigo "+code+" no exite \n"+
+                        "por favor ingrese un producto o valide la opcion 4 para ver los\nproductos existentes");
+            }
+        } catch (Exception e) {
+
+            System.out.println(e.getMessage());
+        }
+*/
