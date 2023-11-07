@@ -3,6 +3,7 @@ package org.example.Administracion;
 import org.example.Compra.Compra;
 import org.example.Interfaces.AdministracionI;
 import org.example.Producto.Producto;
+import org.example.SuperTeclado.SuperKeyBoard;
 import org.example.Venta.Venta;
 
 import java.util.*;
@@ -19,7 +20,7 @@ public class Administracion implements AdministracionI {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("INGRESA EL NOMBRE DEL PRODUCTO: ");
-        String nombreProducto = scanner.nextLine();
+        String nombreProducto =SuperKeyBoard.readText();
 
         System.out.println("INGRESA  LA MARCA DEL PRODUCTO: ");
         String marcaProducto =  scanner.nextLine();
@@ -28,7 +29,7 @@ public class Administracion implements AdministracionI {
         String tipoEmpaque = scanner.nextLine();
 
         System.out.println("INGRESA LA MEDIDA DEL PRODUCTO: ");
-        Double medidaProducto = scanner.nextDouble();
+        Double medidaProducto = SuperKeyBoard.readDecimalNumber();
         scanner.nextLine();
 
         System.out.println("INGRESA EL TIPO DE MEDIDA DEL PRODUCTO: ");
