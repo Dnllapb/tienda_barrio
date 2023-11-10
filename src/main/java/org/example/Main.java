@@ -1,6 +1,10 @@
 package org.example;
 import org.example.Administracion.Administracion;
 import org.example.Compra.Compra;
+import org.example.Interfaces.IProductService;
+import org.example.Producto.Product;
+import org.example.Producto.Producto;
+import org.example.ProductoService.ProductService;
 
 import java.util.Optional;
 import java.util.Scanner;
@@ -10,11 +14,16 @@ public class Main {
 
         Administracion administracion = new Administracion();
         Compra compra = new Compra();
+        Product products = new Product();
+
+        ProductService  productService = new ProductService();
         int opciones = ejecutarMenu();
         while (opciones != 7){
             switch (opciones) {
                 case 1 :
-                    administracion.crearProducto(administracion);
+                    //administracion.crearProducto(administracion);
+                    productService.cargarArchivoCSV();
+
                     break;
                 case 2 :
                     administracion.modificarProducto(administracion);
