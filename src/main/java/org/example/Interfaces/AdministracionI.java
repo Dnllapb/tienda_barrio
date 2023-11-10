@@ -11,5 +11,7 @@ public interface AdministracionI {
     Optional<Producto> buscarProducto(String codigoProducto);
     Optional<Producto> modificarProducto(String codigoProducto, String opcion, String nuevoValor);
 
+;
+
 
 }

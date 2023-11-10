@@ -14,7 +14,15 @@ public  class Producto  {
     private int cantidadProducto;
     private  static int contadorID =  0;
     private  double valorUnitario;
+
     private List<Producto> productoList = new ArrayList<>();
+
+    public  Producto ()
+    {
+
+    }
+
+
     public Producto(String nombreProducto, String marcaProducto, String tipoEmpaque, Double medidaProducto, String tipoMedidaProducto, String etiquetaProducto, String categoriaProducto, int cantidadProducto) {
         //Metodo principal para crear el producto
         this.codigoProducto = String.valueOf(++contadorID);
